@@ -33,4 +33,6 @@ Route::post('/verify-otp', [AuthController::class, 'verifyOTP']);
 Route::post('/new-register',[AuthController::class,"register"])->name("user.register");
 Route::post('/send-login-link', [AuthController::class, 'sendLoginLink'])->name('sendLoginLink');
 Route::get('/login/link', [AuthController::class, 'loginViaLink'])->name('loginViaLink');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
