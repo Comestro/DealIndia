@@ -19,7 +19,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <title>@yield('title') | Real India</title>
 
@@ -40,31 +40,45 @@
     <nav class="bg-blue-900 text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
             <a href="#" class="text-2xl font-bold">
-                <img src="logo.png" width="15%"  alt="">
+                <img src="logo.png" width="15%" alt="">
             </a>
             <ul class="flex space-x-4">
                 <li><a href="#services" class="hover:underline">Services</a></li>
                 <li><a href="#about" class="hover:underline">About</a></li>
                 <li><a href="#contact" class="hover:underline">Contact</a></li>
                 <li><a href="{{ url('register') }}" class="hover:underline">Register</a></li>
+                @guest
+                <li><a href="{{ route('login') }}" class="hover:underline">Login</a></li>
+                @endguest
+                @auth
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="hover:underline bg-transparent border-none cursor-pointer text-blue-600">
+                            Logout
+                        </button>
+                    </form>
+                </li>
+                @endauth
+
 
             </ul>
         </div>
     </nav>
     <div class="min-h-screen flex bg-gray-100">
         <div class="flex-1 flex flex-col">
-            
+
 
             <!-- Dashboard Content -->
 
             <div class="">
                 @yield('content')
-            @show
-        </div>
-      @include('user.include.footer')
+                @show
+            </div>
+            @include('user.include.footer')
 
+        </div>
     </div>
-</div>
 
 </body>
 

@@ -167,6 +167,15 @@ class AuthController extends Controller
         }
     }
 
+    public function logout()
+    {
+        Auth::logout(); // Logs out the current user
+        request()->session()->invalidate(); // Invalidates the session
+        request()->session()->regenerateToken(); // Regenerates the CSRF token
+        
+        return redirect('/login')->with('success', 'You have been logged out.');
+    }
+
     public function loginViaLink(Request $request)
     {
         $validator = Validator::make($request->all(), [
